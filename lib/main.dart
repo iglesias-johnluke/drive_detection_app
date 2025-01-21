@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'dart:math';
+
+
+
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Drive Detector',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: DefaultTabController(
-          length: 2,
+        length: 2,
         child: MyHomePage(title: 'Drive Detector')
       )
     );
@@ -58,8 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Text("Weekly Trips")
-      ],
+    ],
     );
   }
 
