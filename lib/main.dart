@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Drive Detector'),
+      home: DefaultTabController(
+          length: 2,
+        child: MyHomePage(title: 'Drive Detector')
+      )
     );
   }
 }
@@ -30,35 +33,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+          bottom: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.directions_car), text: "Past Trips",),
+              Tab(icon: Icon(Icons.bar_chart), text: "Analytics",),
+            ],
+          ),
+          title: const Text('Drive Tracker')
       ),
-      body: IntrinsicHeight(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Trips',
-              style: TextStyle(
-                fontSize: 25,
-              )
-            ),
-            tripCard("Jan 19, 2025 1:00pm", "to (-35.2, -2.5)"),
-            tripCard("October 1, 2024 9:00pm", "to (-35.2, -2.5)")
-          ],
-        ),
+      body: TabBarView(
+          children: [
+            pastTripTab(),
+            analyticsTab()
+          ]
       ),
+    );
+  }
+
+  Widget analyticsTab(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text("Weekly Trips")
+      ],
+    );
+  }
+
+  Widget pastTripTab(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        tripCard("Jan 19, 2025 1:00pm", "to (-35.2, -2.5)"),
+        tripCard("October 1, 2024 9:00pm", "to (-35.2, -2.5)")
+      ],
     );
   }
 
   Widget tripCard(String timestamp, String destination) {
     return Card(
-      margin: EdgeInsets.all(16),
+        margin: EdgeInsets.all(16),
         child: Column(
           children: [
             Row(
@@ -68,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   timestamp,
                   style: TextStyle(
-                    fontSize: 20
+                      fontSize: 20
                   ),
                 )
               ],
