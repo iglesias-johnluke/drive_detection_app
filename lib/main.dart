@@ -30,33 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  Widget tripEntry() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(Icons.car_crash),
-              Text("Jan 19, 2025 1:00pm")
-            ],
-          ),
-          Text("to (-35.2, -2.5)")
-        ],
-      )
-    ) ;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +42,45 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Trips',),
-            tripEntry()
+            const Text(
+              'Trips',
+              style: TextStyle(
+                fontSize: 25,
+              )
+            ),
+            tripCard("Jan 19, 2025 1:00pm", "to (-35.2, -2.5)"),
+            tripCard("October 1, 2024 9:00pm", "to (-35.2, -2.5)")
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Widget tripCard(String timestamp, String destination) {
+    return Card(
+      margin: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.car_crash),
+                Text(
+                  timestamp,
+                  style: TextStyle(
+                    fontSize: 20
+                  ),
+                )
+              ],
+            ),
+            Text(
+                destination,
+                style: TextStyle(
+                    fontSize: 14
+                )
+            )
+          ],
+        )
+    ) ;
   }
 }
